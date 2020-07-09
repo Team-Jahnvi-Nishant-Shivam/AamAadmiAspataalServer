@@ -1,0 +1,27 @@
+version: "3.4"
+
+volumes:
+  postgres:
+
+services:
+
+  db:
+    image: postgres:12.3
+    volumes:
+      - postgres:/var/lib/postgresql/data:z
+    environment:
+      POSTGRES_PASSWORD: 'postgres'
+
+  api_server:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      target: aam_aadmi_aspataal-base
+    command: python3 /code/aam_aadmi_aspataal/manage.py runserver -h 0.0.0.0 -p 80 -d
+    image: api_server
+    volumes:
+      - ..:/code/aam_aadmi_aspataal:z
+    ports:
+      - "80:80"
+    depends_on:
+      - db
