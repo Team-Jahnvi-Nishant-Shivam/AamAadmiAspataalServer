@@ -23,6 +23,11 @@ def create_app(config_path=None, debug=None):
 
     _register_blueprints(app)
 
+
+    # Error handling
+    from aam_aadmi_aspataal.api_server.errors import init_error_handlers
+    init_error_handlers(app)
+
     return app
 
 def _register_blueprints(app):
