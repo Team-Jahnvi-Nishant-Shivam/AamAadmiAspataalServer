@@ -69,5 +69,22 @@ def init_db(force, create_db):
         print("Done!")
 
 
+@cli.command()
+@click.option("--host", "-h", default="0.0.0.0", show_default=True)
+@click.option("--port", "-p", default=8080, show_default=True)
+@click.option("--debug", "-d", is_flag=True,
+              help="Turns debugging mode on or off. If specified, overrides "
+                   "'DEBUG' value in the config file.")
+def runserver(host, port, debug=False):
+    application = api_server.create_app()
+    run_simple(
+        hostname=host,
+        port=port,
+        application=application,
+        use_debugger=debug,
+        use_reloader=debug,
+        processes=5
+    )
+
 if __name__ == '__main__':
     cli()

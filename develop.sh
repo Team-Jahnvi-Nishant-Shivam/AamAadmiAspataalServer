@@ -1,6 +1,6 @@
 #!/bin/bash
 
-POSTGRES_LB_URI="postgresql://postgres:postgres@db/postgres"
+SQLALCHEMY_DATABASE_URI="postgresql://aam_aadmi_aspataal:aam_aadmi_aspataal@db:5432/aam_aadmi_aspataal"
 
 if [[ ! -d "docker" ]]; then
     echo "This script must be run from the top level directory of the listenbrainz-server source."
@@ -21,7 +21,7 @@ function invoke_manage {
 
 function open_psql_shell {
     invoke_docker_compose run --rm api_server psql \
-        $POSTGRES_LB_URI
+        $SQLALCHEMY_DATABASE_URI
 }
 
 if [ "$1" == "manage" ]; then shift

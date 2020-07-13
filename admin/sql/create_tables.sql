@@ -6,10 +6,10 @@ CREATE TABLE doctor (
   name                  VARCHAR,
   email_id              VARCHAR,
   specialisation        VARCHAR,
-  license_no            VARCHAR
+  registration_no       VARCHAR
 );
 ALTER TABLE doctor ADD CONSTRAINT doctor_firebase_id_key UNIQUE (firebase_id);
-ALTER TABLE doctor ADD CONSTRAINT docktor_license_key UNIQUE (firebase_id);
+ALTER TABLE doctor ADD CONSTRAINT doctor_registration_no_key UNIQUE (registration_no);
 
 CREATE TABLE patient (
   id                    SERIAL, --PK
@@ -23,7 +23,7 @@ CREATE TABLE appointment (
   id                    SERIAL, -- PK
   doctor_id             INTEGER NOT NULL, -- FK to doctor.id
   patient_id            INTEGER NOT NULL, -- FK to patient.id
-  time                  VARCHAR NOT NULL,
+  time                  TIMESTAMP,
   problem_description   VARCHAR
 );
 
