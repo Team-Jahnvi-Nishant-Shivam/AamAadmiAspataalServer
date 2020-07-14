@@ -19,10 +19,12 @@ def gen_app():
 
 def create_app(config_path=None, debug=None):
 
+    # configure timezone
+    os.environ['TZ'] = 'Asia/Kolkata'
+
     app = gen_app()
 
     _register_blueprints(app)
-
 
     # Error handling
     from aam_aadmi_aspataal.api_server.errors import init_error_handlers
@@ -32,4 +34,6 @@ def create_app(config_path=None, debug=None):
 
 def _register_blueprints(app):
     from aam_aadmi_aspataal.api_server.views.doctor import doctor_bp
+    from aam_aadmi_aspataal.api_server.views.patient import patient_bp
     app.register_blueprint(doctor_bp, url_prefix='/doctor')
+    app.register_blueprint(patient_bp, url_prefix='/patient')
