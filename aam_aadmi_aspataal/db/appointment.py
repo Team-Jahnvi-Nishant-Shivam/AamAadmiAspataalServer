@@ -4,15 +4,16 @@ import sqlalchemy
 from aam_aadmi_aspataal import db
 
 
-def create(doctor_id: str, patient_id: str, time: str):
+def create(doctor_id: str, patient_id: str, time: str, problem_description: str):
     with db.engine.connect() as connection:
         connection.execute(sqlalchemy.text("""
-            INSERT INTO appointment (doctor_id, patient_id, time)
-                VALUES (:doctor_id, :patient_id, :time)
+            INSERT INTO appointment (doctor_id, patient_id, time, problem_description)
+                VALUES (:doctor_id, :patient_id, :time, :problem_description)
             """), {
                 'doctor_id': doctor_id,
                 'patient_id': patient_id,
                 'time': time,
+                'problem_description': problem_description
             }
         )
 

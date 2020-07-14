@@ -115,6 +115,7 @@ def book_appointment():
     patient = _validate_patient_auth_header()
     
     doctor_firebase_id = request.args.get('doctor_id')
+    problem_description = request.args.get('problem_description')
 
     if doctor_firebase_id is None:
         log_raise_400('Doctor ID missing.')
@@ -162,7 +163,8 @@ def book_appointment():
             break
 
     try:
-        db_appointment.create(doctor_id=doctor['id'], patient_id=patient['id'], time=appointment_time)
+        db_appointment.create(doctor_id=doctor['id'], patient_id=patient['id'], time=appointment_time,
+                              problem_description=problem_description)
     except Exception as e:
         log_raise_503("Couldn't create record. Please try again later.", str(e))
 
