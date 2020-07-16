@@ -34,7 +34,7 @@ def signup():
 
 
 @crossdomain(headers='Authorization, Content-Type')
-@patient_bp.route('/get-details', methods=['POST'])
+@patient_bp.route('/get-details')
 def get_details():
     patient = _validate_patient_auth_header()
 
@@ -93,7 +93,7 @@ def upload_report():
 
 
 @crossdomain(headers='Authorization, Content-Type')
-@patient_bp.route('/get-reports', methods=['POST'])
+@patient_bp.route('/get-reports')
 def get_reports():
     patient = _validate_patient_auth_header()
     
@@ -177,7 +177,7 @@ def book_appointment():
 
 
 @crossdomain(headers='Authorization, Content-Type')
-@patient_bp.route('/get-appointments-for-today', methods=['POST'])
+@patient_bp.route('/get-appointments-for-today')
 def get_appointments_for_today():
     patient = _validate_patient_auth_header()
 
@@ -201,7 +201,7 @@ def get_appointments_for_today():
 
 
 @crossdomain(headers='Authorization, Content-Type')
-@patient_bp.route('/get-past-appointments', methods=['POST'])
+@patient_bp.route('/get-past-appointments')
 def get_past_appointments():
     patient = _validate_patient_auth_header()
 
@@ -222,7 +222,7 @@ def get_past_appointments():
 
 
 @crossdomain(headers='Authorization, Content-Type')
-@patient_bp.route('/get-all-appointments', methods=['POST'])
+@patient_bp.route('/get-all-appointments')
 def getall_appointments():
     patient = _validate_patient_auth_header()
 
