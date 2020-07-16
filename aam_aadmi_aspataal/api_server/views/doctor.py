@@ -57,6 +57,8 @@ def update_details():
     try:
         db_doctor.update_record(id=doctor['id'], name=name, email_id=email_id,
                                 specialisation=specialisation, registration_no=registration_no)
+    except sqlalchemy.exc.IntegrityError as e:
+        log_raise_409('A doctor with registration_no %s is already registered.' % str(registration_no), str(e))
     except Exception as e:
         log_raise_503("Couldn't update record. Please try again later.", str(e))
 
