@@ -33,7 +33,9 @@ def create_app(config_path=None, debug=None):
     return app
 
 def _register_blueprints(app):
+    from aam_aadmi_aspataal.api_server.views.index import index_bp
     from aam_aadmi_aspataal.api_server.views.doctor import doctor_bp
     from aam_aadmi_aspataal.api_server.views.patient import patient_bp
+    app.register_blueprint(index_bp, url_prefix='/')
     app.register_blueprint(doctor_bp, url_prefix='/doctor')
     app.register_blueprint(patient_bp, url_prefix='/patient')
