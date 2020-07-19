@@ -24,7 +24,7 @@ def signup():
     except sqlalchemy.exc.IntegrityError as e:
         log_raise_409('A patient with firebase_id %s is already registered.' % str(firebase_id), str(e))
     except Exception as e:
-        log_raise_503("Couldn't insert record. Please try again later.", str(e))
+        log_raise_503("Couldn't create record. Please try again later.", str(e))
 
     return jsonify(
         {
@@ -100,7 +100,7 @@ def get_reports():
     try:
         reports = db_report.get_by_patient_id(patient_id=patient['id'])
     except Exception as e:
-        log_raise_503("Couldn't create record. Please try again later.", str(e))
+        log_raise_503("Couldn't get records. Please try again later.", str(e))
 
     return jsonify(
         {
@@ -132,7 +132,7 @@ def book_appointment():
     if next_appointment_time:
         log_raise_409("Your appointment is already scheduled at: %s" %next_appointment_time)
 
-    # Get doctor's latest appointment time
+    # Get doctor's and patient's latest appointment time
     latest_appointment_time = db_appointment.get_latest_appointment_time_for_doctor_or_patient(doctor_id=doctor['id'],
                                                                                                patient_id=patient['id'])
 
@@ -225,8 +225,6 @@ def get_past_appointments():
 @patient_bp.route('/get-all-appointments')
 def getall_appointments():
     patient = _validate_patient_auth_header()
-
-    end_time = datetime.now()
 
     try:
         appointments = db_appointment.get_all_appointments_for_patient(patient_id=patient['id'])
