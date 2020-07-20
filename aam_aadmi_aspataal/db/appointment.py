@@ -61,6 +61,8 @@ def get_appointments_for_today_for_doctor(doctor_id: str, start_time: str, end_t
              WHERE a.doctor_id = :doctor_id
               AND time >= :start_time
               AND time <= :end_time
+             ORDER BY time
+              DESC
             """), {
                 'doctor_id': doctor_id,
                 'start_time': start_time,
@@ -80,6 +82,8 @@ def get_appointments_for_today_for_patient(patient_id: str, start_time: str, end
              WHERE a.patient_id = :patient_id
               AND time >= :start_time
               AND time <= :end_time
+             ORDER BY time
+              DESC
             """), {
                 'patient_id': patient_id,
                 'start_time': start_time,
@@ -100,6 +104,8 @@ def get_past_appointments_for_doctor(doctor_id: str, end_time: str):
               ON a.id = pr.appointment_id
              WHERE a.doctor_id = :doctor_id
               AND time <= :end_time
+             ORDER BY time
+              DESC
             """), {
                 'doctor_id': doctor_id,
                 'end_time': end_time
@@ -119,6 +125,8 @@ def get_past_appointments_for_patient(patient_id: str, end_time: str):
               ON a.id = pr.appointment_id
              WHERE a.patient_id = :patient_id
               AND time <= :end_time
+             ORDER BY time
+              DESC
             """), {
                 'patient_id': patient_id,
                 'end_time': end_time
@@ -137,6 +145,8 @@ def get_all_appointments_for_doctor(doctor_id: str):
             LEFT JOIN prescription pr
               ON a.id = pr.appointment_id
              WHERE a.doctor_id = :doctor_id
+             ORDER BY time
+              DESC
             """), {
                 'doctor_id': doctor_id
             }
@@ -154,6 +164,8 @@ def get_all_appointments_for_patient(patient_id: str):
             LEFT JOIN prescription pr
               ON a.id = pr.appointment_id
              WHERE a.patient_id = :patient_id
+             ORDER BY time
+              DESC
             """), {
                 'patient_id': patient_id
             }
