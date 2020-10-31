@@ -3,7 +3,7 @@
 SQLALCHEMY_DATABASE_URI="postgresql://aam_aadmi_aspataal:aam_aadmi_aspataal@db:5432/aam_aadmi_aspataal"
 
 if [[ ! -d "docker" ]]; then
-    echo "This script must be run from the top level directory of the listenbrainz-server source."
+    echo "This script must be run from the top level directory of the aam_aadmi_aspataal source."
     exit -1
 fi
 
@@ -35,11 +35,6 @@ elif [ "$1" == "psql" ]; then
     exit
 
 else
-    if [ "$#" == 0 ]; then
-        echo "No argument provided. Trying to run docker-compose..."
-    else
-        echo "Trying to run the passed command with docker-compose..."
-    fi
+    echo "Running docker-compose with the given command..."
     invoke_docker_compose "$@"
-    exit
 fi
