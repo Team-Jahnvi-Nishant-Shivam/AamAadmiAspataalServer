@@ -1,4 +1,4 @@
-Flask-SQLAlchemy == 2.4.3
+Flask-SQLAlchemy == 2.4.4
 psycopg2-binary ==  2.8.5
 click == 7.1.2
-six == 1.10.0
+six == 1.15.0
