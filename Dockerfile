@@ -1,4 +1,4 @@
-FROM python:3.8 as aam_aadmi_aspataal-base
+FROM python:3.8-buster as aam_aadmi_aspataal-base
 
 ENV DOCKERIZE_VERSION v0.6.1
 
